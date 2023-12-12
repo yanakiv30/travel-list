@@ -9,7 +9,7 @@ export default function App() {
   return <div className="app">
     <Logo />
     <Form />
-    <PackingList />  
+    <PackingList />
     <Stats />
   </div>
 }
@@ -19,17 +19,26 @@ function Logo() {
 }
 
 function Form() {
-  return <div className="add-form">
+  return <form className="add-form">
     <h3>What do you need for your 😎 trip</h3>
+    <select>
+      {Array.from({ length: 20 }, (_, i) => i + 1)
+        .map(num => (<option value={num} key={num}>{num}</option>))}
+      {/* <option value={2}>2</option>  not dynamic */}
+    </select>
+    <input type="text" placeholder="Item..." />
+    <button>ADD</button>
 
-  </div>
+  </form>
 }
 
 function PackingList() {
   return (
     <div className="list">
       <ul >
-        {initialItems.map((item) => (<Item item={item} />
+        {initialItems.map((item) => (
+          <Item item={item} key={item.id} />
+
         ))}
       </ul>
     </div>
@@ -39,9 +48,9 @@ function PackingList() {
 function Item({ item }) {
   return (
     <li>
-      <span style={item.packed ? {textDecoration: "line-through"} : {}}>
+      <span style={item.packed ? { textDecoration: "line-through" } : {}}>
         {item.quantity} {item.description}
-        </span>
+      </span>
       <button>❌</button>
     </li>
 
